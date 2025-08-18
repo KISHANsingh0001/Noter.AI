@@ -56,8 +56,8 @@ See `.env.example` for the complete list of required variables.
 
 ## Copyright
 
-© 2023 Kishan Singh Thakur. All Rights Reserved.
+© 2025 Kishan Singh Thakur. All Rights Reserved.
 
 ---
 
-Created with ❤️
+Created By ❤️ Kishan Singh Thakur
