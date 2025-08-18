@@ -157,7 +157,65 @@ function UploadPdfDialog({ children, isMaxFile , onDialogOpen }) {
     setFile(event.target.files[0]);
   };
   
-  const OnUpload = async() => {
+  // const OnUpload = async() => {
+  //   // Don't allow upload if max files reached
+  //   if (isMaxFile) {
+  //     toast.error("You've reached the maximum number of files allowed. Please upgrade to add more.");
+  //     router.push("/dashboard/upgrade");
+  //     handleClose();
+  //     return;
+  //   }
+
+  //   setLoading(true);
+
+   
+  //     // Step 1: Get a short-lived upload URL
+  //     const postUrl = await generateUploadUrl();
+  
+  //     // Step 2: POST the file to the URL
+  //     const result = await fetch(postUrl, {
+  //       method: "POST",
+  //       headers: { "Content-Type": file?.type },
+  //       body: file,
+  //     });
+  
+  //     const { storageId } = await result.json();
+  //     console.log('StorageId', storageId);
+  
+  //     const fileId = uuid4();
+  
+  //     const fileUrl = await getFileUrl({storageId: storageId});
+  
+  //     // Step 3: Save the newly allocated storage id to the database
+  //     const resp = await AddFileEntry({
+  //       fileId: fileId,
+  //       storageId: storageId,
+  //       fileName: fileName || file?.name || "untitled File",
+  //       fileUrl: fileUrl,
+  //       createdBy: user?.primaryEmailAddress?.emailAddress
+  //     });
+  //     console.log(resp);
+  
+  //     // API Call To Fetch PDF Process DATA
+  //     const ApiResp = await axios.get(`/api/pdf-loader?pdfUrl=${fileUrl}`);
+  //     console.log(ApiResp.data.result);
+  
+  //     await embeddDocument({
+  //       splitText: ApiResp.data.result,
+  //       fileId: fileId
+  //     });
+      
+  //     toast.success("PDF uploaded successfully!");
+  //     handleClose();
+  //     router.refresh(); // Refresh to update the file count
+  
+  
+  //     setLoading(false);
+  
+  // };
+  
+  // Function to handle dialog closing
+    const OnUpload = async () => {
     // Don't allow upload if max files reached
     if (isMaxFile) {
       toast.error("You've reached the maximum number of files allowed. Please upgrade to add more.");
@@ -166,9 +224,14 @@ function UploadPdfDialog({ children, isMaxFile , onDialogOpen }) {
       return;
     }
 
+    if (!file) {
+      toast.error("Please select a file to upload.");
+      return;
+    }
+
     setLoading(true);
 
-   
+    try {
       // Step 1: Get a short-lived upload URL
       const postUrl = await generateUploadUrl();
   
@@ -178,43 +241,51 @@ function UploadPdfDialog({ children, isMaxFile , onDialogOpen }) {
         headers: { "Content-Type": file?.type },
         body: file,
       });
+
+      if (!result.ok) {
+        // This will catch HTTP errors like 404 or 500
+        throw new Error(`File upload failed with status: ${result.status}`);
+      }
   
       const { storageId } = await result.json();
-      console.log('StorageId', storageId);
   
       const fileId = uuid4();
   
-      const fileUrl = await getFileUrl({storageId: storageId});
+      const fileUrl = await getFileUrl({ storageId: storageId });
   
       // Step 3: Save the newly allocated storage id to the database
-      const resp = await AddFileEntry({
+      await AddFileEntry({
         fileId: fileId,
         storageId: storageId,
-        fileName: fileName || file?.name || "untitled File",
+        fileName: fileName || file?.name || "Untitled File",
         fileUrl: fileUrl,
         createdBy: user?.primaryEmailAddress?.emailAddress
       });
-      console.log(resp);
   
       // API Call To Fetch PDF Process DATA
       const ApiResp = await axios.get(`/api/pdf-loader?pdfUrl=${fileUrl}`);
-      console.log(ApiResp.data.result);
+      
+      if (ApiResp.status !== 200) {
+        throw new Error("Failed to process the PDF file.");
+      }
   
       await embeddDocument({
         splitText: ApiResp.data.result,
         fileId: fileId
       });
       
-      toast.success("PDF uploaded successfully!");
+      toast.success("PDF uploaded and processed successfully!");
       handleClose();
       router.refresh(); // Refresh to update the file count
   
-  
+    } catch (error) {
+      console.error("Upload failed:", error);
+      toast.error("An error occurred during upload. Please try again.");
+    } finally {
+      // This block is guaranteed to run, whether the upload succeeds or fails.
       setLoading(false);
-  
+    }
   };
-  
-  // Function to handle dialog closing
   const handleClose = () => {
     setOpen(false);
     // Reset form state
