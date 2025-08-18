@@ -258,16 +258,21 @@ import { useUser } from "@clerk/nextjs";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useMutation } from "convex/react";
 import React from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 function Upgrade() {
   const { user } = useUser();
+  const router = useRouter()
   const upgradeUserPlan = useMutation(api.user.userUpgradePlan);
   const OnpaymentSuccess = async () => {
     const result = await upgradeUserPlan({
       userEmail: user?.primaryEmailAddress?.emailAddress,
     });
     toast("Plan Upgraded Successfully");
+     setTimeout(() => {
+        router.push("/dashboard");
+      }, 1500);
   };
 
   return (
@@ -543,7 +548,7 @@ function Upgrade() {
               <div className="mt-6 bg-gray-700/20 p-3 rounded-md">
                 <PayPalButtons
                   style={{
-                    color: "blue",
+                    color: "gold",
                     height: 40,
                     shape: "pill",
                   }}
@@ -559,12 +564,21 @@ function Upgrade() {
                           },
                         },
                       ],
+                      application_context: {
+                        shipping_preference: "NO_SHIPPING",
+                        user_action: "PAY_NOW",
+                        return_url: window.location.href,
+                        cancel_url: window.location.href,
+                        brand_name: "Noter.AI",
+                        popup:true,
+                        landing_page: "LOGIN",
+                        payment_method: {
+                          payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED",
+                        },
+                      },
                     });
                   }}
                 />
-                <p className="text-center text-xs text-gray-500 mt-3">
-                  30-day money back guarantee
-                </p>
               </div>
             </div>
           </div>
