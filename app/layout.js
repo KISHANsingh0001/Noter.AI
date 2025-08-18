@@ -19,9 +19,7 @@ export default function RootLayout({ children }) {
           <link rel="icon" href="/ai.png" type="image/x-icon" />
           <meta name="description" content={metadata.description} />
         </head>
-      <body
-       className={outfit.className}
-       >
+      <body className={outfit.className}>
         <Provider>
           {children}
           <Toaster/>
