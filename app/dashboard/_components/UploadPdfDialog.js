@@ -168,7 +168,7 @@ function UploadPdfDialog({ children, isMaxFile , onDialogOpen }) {
 
     setLoading(true);
 
-    try {
+   
       // Step 1: Get a short-lived upload URL
       const postUrl = await generateUploadUrl();
   
@@ -208,12 +208,10 @@ function UploadPdfDialog({ children, isMaxFile , onDialogOpen }) {
       toast.success("PDF uploaded successfully!");
       handleClose();
       router.refresh(); // Refresh to update the file count
-    } catch (error) {
-      console.error("Upload error:", error);
-      toast.error("Failed to upload PDF. Please try again.");
-    } finally {
+  
+  
       setLoading(false);
-    }
+  
   };
   
   // Function to handle dialog closing
