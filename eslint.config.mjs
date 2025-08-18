@@ -9,6 +9,14 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.extends("next/core-web-vitals")];
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals"),
+  {
+    rules: {
+      "semi": ["error", "never"],
+      "@typescript-eslint/semi": ["error", "never"]
+    }
+  }
+];
 
 export default eslintConfig;
