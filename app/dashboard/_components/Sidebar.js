@@ -389,7 +389,7 @@ function SideBar() {
 
   const nav = [
     { path: "/dashboard", label: "Workspace", icon: <Layout className="h-5 w-5" /> },
-    { path: "/dashboard/upgrade", label: "Upgrade", icon: <Shield className="h-5 w-5" /> },
+    // { path: "/dashboard/upgrade", label: "Upgrade", icon: <Shield className="h-5 w-5" /> },
   ];
 
   const goUpgrade = () => {
@@ -448,10 +448,12 @@ function SideBar() {
   const Content = (
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between w-full">
+        <Link href={"/"}>
         <div className="flex items-center gap-2">
           <Image src="/ai.png" alt="logo" width={65} height={40} className="object-contain" />
           <span className="font-bold text-2xl text-gray-100">Noter.AI</span>
         </div>
+        </Link>
         {isMobile && (
           <button onClick={() => setOpen(false)} aria-label="Close" className="text-gray-300 hover:text-white">
             <X className="h-6 w-6" />

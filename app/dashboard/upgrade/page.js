@@ -257,13 +257,14 @@ import { userUpgradePlan } from "@/convex/user";
 import { useUser } from "@clerk/nextjs";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useMutation } from "convex/react";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 function Upgrade() {
   const { user } = useUser();
   const router = useRouter()
+    const [isProcessing, setIsProcessing] = useState(false);
   const upgradeUserPlan = useMutation(api.user.userUpgradePlan);
   const OnpaymentSuccess = async () => {
     const result = await upgradeUserPlan({
@@ -545,38 +546,59 @@ function Upgrade() {
                 </li>
               </ul>
 
-              <div className="mt-6 bg-gray-700/20 p-3 rounded-md">
+               <div className="mt-6 bg-gray-700/20 p-3 rounded-md">
                 <PayPalButtons
                   style={{
                     color: "gold",
                     height: 40,
                     shape: "pill",
                   }}
-                  onApprove={() => OnpaymentSuccess()}
-                  onCancel={() => console.log("Order Cancel")}
+                  disabled={isProcessing}
                   createOrder={(_, actions) => {
                     return actions?.order?.create({
                       purchase_units: [
                         {
                           amount: {
-                            value: 9.99,
+                            value: "9.99", // Use string for currency values
                             currency_code: "USD",
                           },
+                          description: "Noter.AI Premium Upgrade",
                         },
                       ],
-                      application_context: {
-                        shipping_preference: "NO_SHIPPING",
-                        user_action: "PAY_NOW",
-                        return_url: window.location.href,
-                        cancel_url: window.location.href,
-                        brand_name: "Noter.AI",
-                        popup:true,
-                        landing_page: "LOGIN",
-                        payment_method: {
-                          payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED",
-                        },
-                      },
                     });
+                  }}
+                  onApprove={async (data, actions) => {
+                    // 'data.orderID' is the transaction ID from PayPal
+                    const orderID = data.orderID;
+                    setIsProcessing(true);
+                    
+                    try {
+                      toast.loading("Verifying your payment...");
+                      
+                      // Call the secure backend action to verify the payment
+                      await verifyPayment({ orderID });
+                      
+                      toast.dismiss();
+                      toast.success("Plan Upgraded Successfully!");
+                      
+                      setTimeout(() => {
+                        router.push("/dashboard");
+                      }, 1500);
+
+                    } catch (error) {
+                      toast.dismiss();
+                      toast.error("Payment verification failed. Please contact support.");
+                      console.error("Verification Error:", error);
+                    } finally {
+                      setIsProcessing(false);
+                    }
+                  }}
+                  onCancel={() => {
+                    toast.info("Payment canceled.");
+                  }}
+                  onError={(err) => {
+                    toast.error("A PayPal error occurred. Please try again.");
+                    console.error("PayPal Button Error:", err);
                   }}
                 />
               </div>

@@ -11,6 +11,11 @@ import {
   Sparkles,
   Brain,
   Search,
+  Megaphone,
+  Github,
+  Linkedin,
+  Twitter,
+  Mail,
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -76,7 +81,17 @@ export default function LandingPage() {
           )}
         </div>
       </header>
-
+ {/* Announcement Section */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 text-center text-sm sm:text-base font-medium">
+        <div className="flex items-center justify-center gap-2">
+          <Megaphone className="h-5 w-5" />
+          <span>
+            Limited Time Offer: Sign up now and get a{" "}
+            <span className="font-bold underline">FREE Premium Upgrade!</span> New
+            pricing is coming soon.
+          </span>
+        </div>
+      </div>
       {/* Hero Section */}
       <section className="relative py-20 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 -z-10 opacity-30">
@@ -342,7 +357,7 @@ export default function LandingPage() {
               <div className="mb-4 text-gray-400 text-sm uppercase font-medium tracking-wide">
                 Free
               </div>
-              <h3 className="text-3xl font-bold mb-2 text-white">$0</h3>
+              <h3 className="text-3xl font-bold mb-2 text-white">₹0</h3>
               <p className="text-gray-300 mb-6 text-sm">Forever free</p>
 
               <div className="h-px w-full bg-gray-700/50 my-6"></div>
@@ -369,14 +384,14 @@ export default function LandingPage() {
             </div>
 
             {/* Premium Plan */}
-            <div className="relative bg-gradient-to-br from-blue-900/20 to-purple-900/20 p-8 rounded-xl border border-blue-700/30 hover:border-blue-600/50 transition-all">
+           <div className="relative bg-gradient-to-br from-blue-900/20 to-purple-900/20 p-8 rounded-xl border border-blue-700/30 hover:border-blue-600/50 transition-all">
               <div className="absolute -top-4 right-4 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium">
                 Most Popular
               </div>
               <div className="mb-4 text-blue-400 text-sm uppercase font-medium tracking-wide">
                 Premium
               </div>
-              <h3 className="text-3xl font-bold mb-2 text-white">$9.99</h3>
+              <h3 className="text-3xl font-bold mb-2 text-white">₹599</h3>
               <p className="text-gray-300 mb-6 text-sm">One-time payment</p>
 
               <div className="h-px w-full bg-blue-700/30 my-6"></div>
@@ -401,7 +416,7 @@ export default function LandingPage() {
                   </span>
                 </li>
               </ul>
-              <Link href={isSignedIn ? "/dashboard/upgrade" : "/sign-up"}>
+              <Link href={isSignedIn ? "/" : "/sign-up"}>
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                   Upgrade to Premium
                 </Button>
@@ -413,7 +428,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="mt-20 py-8 px-4 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
             <Image
               src="/ai.png"
@@ -424,7 +439,46 @@ export default function LandingPage() {
             />
             <span className="font-medium text-lg text-gray-300">Noter.AI</span>
           </div>
-          <div className="text-gray-400 text-sm">
+
+          {/* Social Links */}
+          <div className="flex items-center gap-5">
+            <a
+              href="https://github.com/KISHANsingh0001"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/kishan-singh-thakur-26b912255/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a
+              href="https://x.com/KishanS36200218"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+              aria-label="Twitter"
+            >
+              <Twitter className="h-5 w-5" />
+            </a>
+            <a
+              href="mailto:kishanthakur27@gmail.com"
+              className="text-gray-400 hover:text-white transition-colors"
+              aria-label="Email"
+            >
+              <Mail className="h-5 w-5" />
+            </a>
+          </div>
+
+          <div className="text-gray-400 text-sm text-center md:text-right">
             © {new Date().getFullYear()} ❤️ Kishan Singh Thakur. All rights
             reserved.
           </div>
