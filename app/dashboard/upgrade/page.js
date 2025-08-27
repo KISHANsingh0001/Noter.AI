@@ -1,256 +1,4 @@
-// "use client"
-// import { api } from "@/convex/_generated/api";
-// import { userUpgradePlan } from "@/convex/user";
-// import { useUser } from "@clerk/nextjs";
-// import { PayPalButtons } from "@paypal/react-paypal-js";
-// import { useMutation } from "convex/react";
-// import React from "react";
-// import { toast } from "sonner";
 
-// function Upgrade() {
-//   const {user} = useUser();
-//   const upgradeUserPlan = useMutation(api.user.userUpgradePlan)
-//   const OnpaymentSuccess = async()=>{
-//     const result = await upgradeUserPlan({userEmail:user?.primaryEmailAddress?.emailAddress});
-//     toast("Plan Upgraded Successfully")
-
-//   }
-//   return (
-//     <div>
-//       <h2 className="font-medium  text-3xl">Plans</h2>
-//       <p>Update Your Plan To Upload Multiple Pdf to take Notes</p>
-
-//       <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-//         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8">
-//           <div className="rounded-2xl border border-indigo-600 p-6 shadow-xs ring-1 ring-indigo-600 sm:order-last sm:px-8 lg:p-12">
-//             <div className="text-center">
-//               <h2 className="text-lg font-medium text-gray-900">
-//                 Unlimited
-//                 <span className="sr-only">Unlimited</span>
-//               </h2>
-
-//               <p className="mt-2 sm:mt-4">
-//                 <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-//                   {" "}
-//                   9.99${" "}
-//                 </strong>
-
-//                 <span className="text-sm font-medium text-gray-700">
-//                   /One Time
-//                 </span>
-//               </p>
-//             </div>
-
-//             <ul className="mt-6 space-y-2">
-//               <li className="flex items-center gap-1">
-//                 <svg
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                   strokeWidth="1.5"
-//                   stroke="currentColor"
-//                   className="size-5 text-indigo-700 shadow-sm"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     d="M4.5 12.75l6 6 9-13.5"
-//                   />
-//                 </svg>
-
-//                 <span className="text-gray-700">Unlimited PDF Upload </span>
-//               </li>
-
-//               <li className="flex items-center gap-1">
-//                 <svg
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                   strokeWidth="1.5"
-//                   stroke="currentColor"
-//                   className="size-5 text-indigo-700 shadow-sm"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     d="M4.5 12.75l6 6 9-13.5"
-//                   />
-//                 </svg>
-
-//                 <span className="text-gray-700"> Unlimited Notes Taking </span>
-//               </li>
-
-//               <li className="flex items-center gap-1">
-//                 <svg
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                   strokeWidth="1.5"
-//                   stroke="currentColor"
-//                   className="size-5 text-indigo-700 shadow-sm"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     d="M4.5 12.75l6 6 9-13.5"
-//                   />
-//                 </svg>
-
-//                 <span className="text-gray-700"> Email support </span>
-//               </li>
-
-//               <li className="flex items-center gap-1">
-//                 <svg
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                   strokeWidth="1.5"
-//                   stroke="currentColor"
-//                   className="size-5 text-indigo-700 shadow-sm"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     d="M4.5 12.75l6 6 9-13.5"
-//                   />
-//                 </svg>
-
-//                 <span className="text-gray-700"> Help center access </span>
-//               </li>
-//             </ul>
-//             <div className="mt-5">
-//             <PayPalButtons
-
-//              onApprove={()=>OnpaymentSuccess()}
-//             onCancel={()=>console.log("Order Cancel")
-//             }
-//              createOrder={(_,actions)=>{
-//               return actions?.order?.create({
-//                 purchase_units:[
-//                   {
-//                     amount:{
-//                      value:9.99,
-//                      currency_code:'USD'
-//                   }
-//                   }
-//                 ]
-//               })
-//              }}
-//             />
-//             </div>
-//           </div>
-
-//           <div className="rounded-2xl border border-gray-200 p-6 shadow-xs sm:px-8 lg:p-12">
-//             <div className="text-center">
-//               <h2 className="text-lg font-medium text-gray-900">
-//                 Free
-//                 <span className="sr-only">Free</span>
-//               </h2>
-
-//               <p className="mt-2 sm:mt-4">
-//                 <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-//                   {" "}
-//                   0${" "}
-//                 </strong>
-
-//                 <span className="text-sm font-medium text-gray-700">
-//                   /month
-//                 </span>
-//               </p>
-//             </div>
-
-//             <ul className="mt-6 space-y-2">
-//               <li className="flex items-center gap-1">
-//                 <svg
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                   strokeWidth="1.5"
-//                   stroke="currentColor"
-//                   className="size-5 text-indigo-700 shadow-sm"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     d="M4.5 12.75l6 6 9-13.5"
-//                   />
-//                 </svg>
-
-//                 <span className="text-gray-700"> 5 PDF Upload </span>
-//               </li>
-
-//               <li className="flex items-center gap-1">
-//                 <svg
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                   strokeWidth="1.5"
-//                   stroke="currentColor"
-//                   className="size-5 text-indigo-700 shadow-sm"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     d="M4.5 12.75l6 6 9-13.5"
-//                   />
-//                 </svg>
-
-//                 <span className="text-gray-700"> Unlimited Notes Taking</span>
-//               </li>
-
-//               <li className="flex items-center gap-1">
-//                 <svg
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                   strokeWidth="1.5"
-//                   stroke="currentColor"
-//                   className="size-5 text-indigo-700 shadow-sm"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     d="M4.5 12.75l6 6 9-13.5"
-//                   />
-//                 </svg>
-
-//                 <span className="text-gray-700"> Email support </span>
-//               </li>
-
-//               <li className="flex items-center gap-1">
-//                 <svg
-//                   xmlns="http://www.w3.org/2000/svg"
-//                   fill="none"
-//                   viewBox="0 0 24 24"
-//                   strokeWidth="1.5"
-//                   stroke="currentColor"
-//                   className="size-5 text-indigo-700 shadow-sm"
-//                 >
-//                   <path
-//                     strokeLinecap="round"
-//                     strokeLinejoin="round"
-//                     d="M4.5 12.75l6 6 9-13.5"
-//                   />
-//                 </svg>
-
-//                 <span className="text-gray-700"> Help center access </span>
-//               </li>
-//             </ul>
-
-//             <a
-//               href="#"
-//               className="mt-8 block rounded-full border border-indigo-600 bg-white px-12 py-3 text-center text-sm font-medium text-indigo-600 hover:ring-1 hover:ring-indigo-600 focus:ring-3 focus:outline-hidden"
-//             >
-//              Current Plan
-//             </a>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Upgrade;
 "use client";
 import { api } from "@/convex/_generated/api";
 import { userUpgradePlan } from "@/convex/user";
@@ -260,24 +8,104 @@ import { useMutation } from "convex/react";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Script from "next/script";
+import { Wind } from "lucide-react";
 
 function Upgrade() {
+  const [amount, setAmount] = useState(499);
+
   const { user } = useUser();
-  const router = useRouter()
-    const [isProcessing, setIsProcessing] = useState(false);
+  const router = useRouter();
+  const [isProcessing, setIsProcessing] = useState(false);
   const upgradeUserPlan = useMutation(api.user.userUpgradePlan);
   const OnpaymentSuccess = async () => {
     const result = await upgradeUserPlan({
       userEmail: user?.primaryEmailAddress?.emailAddress,
     });
     toast("Plan Upgraded Successfully");
-     setTimeout(() => {
-        router.push("/dashboard");
-      }, 1500);
+    setTimeout(() => {
+      router.push("/dashboard");
+    }, 1500);
   };
 
+  const createOrder = async () => {
+  try {
+    setIsProcessing(true);
+    const res = await fetch("/api/createOrder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ amount: amount * 100 }),
+    });
+    
+    if (!res.ok) {
+      throw new Error(`Server responded with ${res.status}: ${await res.text()}`);
+    }
+    
+    const data = await res.json();
+    
+    if (!data || !data.id) {
+      throw new Error("Invalid response from server");
+    }
+
+    const paymentData = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      order_id: data.id,
+      amount: data.amount,
+      handler: async function (response) {
+        try {
+          const res = await fetch("/api/verifyOrder", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              orderId: response.razorpay_order_id,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpaySignature: response.razorpay_signature,
+              userEmail: user?.primaryEmailAddress?.emailAddress
+            }),
+          });
+          
+          if (!res.ok) {
+            throw new Error(`Verification failed with status: ${res.status}`);
+          }
+          
+          const data = await res.json();
+          
+          if (data.isOk) {
+            toast.success("Plan Upgraded Successfully");
+            setTimeout(() => {
+              router.push("/dashboard");
+            }, 1500);
+          } else {
+            toast.error(data.message || "Payment verification failed");
+          }
+        } catch (error) {
+          console.error("Verification error:", error);
+          toast.error("Failed to verify payment. Please contact support.");
+        }
+      },
+    };
+    
+    // Initialize Razorpay
+    const razorpay = new window.Razorpay(paymentData);
+    razorpay.open();
+  } catch (error) {
+    console.error("Order creation error:", error);
+    toast.error("Failed to create order: " + error.message);
+  } finally {
+    setIsProcessing(false);
+  }
+};
   return (
     <div className="h-[calc(100vh-73px)] overflow-y-auto bg-gradient-to-br from-gray-900 via-gray-850 to-gray-800 text-gray-200 p-4 md:p-6">
+      <Script
+        type="text/javascript"
+        src="https://checkout.razorpay.com/v1/checkout.js"
+      ></Script>
+
       <div className="max-w-4xl mx-auto">
         <h2 className="font-medium text-2xl md:text-3xl text-white">Plans</h2>
         <p className="text-gray-400 mb-4">
@@ -295,7 +123,7 @@ function Upgrade() {
                 </h2>
 
                 <p className="mt-2">
-                  <strong className="text-3xl font-bold text-white">$0</strong>
+                  <strong className="text-3xl font-bold text-white">0₹</strong>
 
                   <span className="text-sm font-medium text-gray-400 ml-1">
                     /month
@@ -428,7 +256,7 @@ function Upgrade() {
 
                 <p className="mt-2">
                   <strong className="text-3xl font-bold text-white">
-                    $9.99
+                    ₹499
                   </strong>
 
                   <span className="text-sm font-medium text-gray-400 ml-1">
@@ -546,61 +374,14 @@ function Upgrade() {
                 </li>
               </ul>
 
-               <div className="mt-6 bg-gray-700/20 p-3 rounded-md">
-                <PayPalButtons
-                  style={{
-                    color: "gold",
-                    height: 40,
-                    shape: "pill",
-                  }}
+              <div className="flex justify-center">
+                <button
+                  onClick={createOrder}
                   disabled={isProcessing}
-                  createOrder={(_, actions) => {
-                    return actions?.order?.create({
-                      purchase_units: [
-                        {
-                          amount: {
-                            value: "9.99", // Use string for currency values
-                            currency_code: "USD",
-                          },
-                          description: "Noter.AI Premium Upgrade",
-                        },
-                      ],
-                    });
-                  }}
-                  onApprove={async (data, actions) => {
-                    // 'data.orderID' is the transaction ID from PayPal
-                    const orderID = data.orderID;
-                    setIsProcessing(true);
-                    
-                    try {
-                      toast.loading("Verifying your payment...");
-                      
-                      // Call the secure backend action to verify the payment
-                      await verifyPayment({ orderID });
-                      
-                      toast.dismiss();
-                      toast.success("Plan Upgraded Successfully!");
-                      
-                      setTimeout(() => {
-                        router.push("/dashboard");
-                      }, 1500);
-
-                    } catch (error) {
-                      toast.dismiss();
-                      toast.error("Payment verification failed. Please contact support.");
-                      console.error("Verification Error:", error);
-                    } finally {
-                      setIsProcessing(false);
-                    }
-                  }}
-                  onCancel={() => {
-                    toast.info("Payment canceled.");
-                  }}
-                  onError={(err) => {
-                    toast.error("A PayPal error occurred. Please try again.");
-                    console.error("PayPal Button Error:", err);
-                  }}
-                />
+                  className="w-full mt-6 md:mt-8 block rounded-full border border-blue-500 bg-gray-700/30 px-4 py-3 text-center text-sm font-medium text-blue-300 hover:bg-gray-700"
+                >
+                  Pay with Razorpay (UPI/Cards)
+                </button>
               </div>
             </div>
           </div>

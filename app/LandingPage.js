@@ -82,7 +82,7 @@ export default function LandingPage() {
         </div>
       </header>
  {/* Announcement Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 text-center text-sm sm:text-base font-medium">
+      {/* <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 text-center text-sm sm:text-base font-medium">
         <div className="flex items-center justify-center gap-2">
           <Megaphone className="h-5 w-5" />
           <span>
@@ -91,7 +91,7 @@ export default function LandingPage() {
             pricing is coming soon.
           </span>
         </div>
-      </div>
+      </div> */}
       {/* Hero Section */}
       <section className="relative py-20 sm:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 -z-10 opacity-30">
@@ -391,7 +391,7 @@ export default function LandingPage() {
               <div className="mb-4 text-blue-400 text-sm uppercase font-medium tracking-wide">
                 Premium
               </div>
-              <h3 className="text-3xl font-bold mb-2 text-white">₹599</h3>
+              <h3 className="text-3xl font-bold mb-2 text-white">₹499</h3>
               <p className="text-gray-300 mb-6 text-sm">One-time payment</p>
 
               <div className="h-px w-full bg-blue-700/30 my-6"></div>

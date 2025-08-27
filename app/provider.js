@@ -7,14 +7,9 @@ function Provider({ children }) {
   return (
     <div>
       <ConvexProvider client={convex}>
-        <PayPalScriptProvider
-          options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-            debug:true,
-            currency:'USD'
-           }}
-        >
+      
           {children}
-        </PayPalScriptProvider>
+       
       </ConvexProvider>
     </div>
   );

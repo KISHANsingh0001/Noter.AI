@@ -370,7 +370,7 @@ function SideBar() {
   })
   console.log("UserInfo",GetUserInfo);
   
-  // Calculate if max files reached - make sure it's a boolean
+ 
   const isMaxFilesReached = (fileList?.length >= 5 && !GetUserInfo?.upgrade);
 
   // Detect mobile
@@ -389,7 +389,7 @@ function SideBar() {
 
   const nav = [
     { path: "/dashboard", label: "Workspace", icon: <Layout className="h-5 w-5" /> },
-    // { path: "/dashboard/upgrade", label: "Upgrade", icon: <Shield className="h-5 w-5" /> },
+    { path: "/dashboard/upgrade", label: "Upgrade", icon: <Shield className="h-5 w-5" /> },
   ];
 
   const goUpgrade = () => {

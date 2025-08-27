@@ -243,7 +243,7 @@ function UploadPdfDialog({ children, isMaxFile , onDialogOpen }) {
       });
 
       if (!result.ok) {
-        // This will catch HTTP errors like 404 or 500
+       
         throw new Error(`File upload failed with status: ${result.status}`);
       }
   
@@ -302,7 +302,7 @@ function UploadPdfDialog({ children, isMaxFile , onDialogOpen }) {
     <Dialog open={open} onOpenChange={(newOpen) => {
       setOpen(newOpen);
       
-      // If dialog is opening and we have a callback, call it
+      
       if (newOpen && onDialogOpen) {
         onDialogOpen();
       }

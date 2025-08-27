@@ -6,7 +6,7 @@ export const createUser = mutation({
         email:v.string(),
         userName:v.string(),
         imageUrl:v.string(),
-       
+
     },
     handler:async (ctx,args)=>{
         // if user already exist
@@ -19,7 +19,7 @@ export const createUser = mutation({
                 email:args.email,
                 userName:args.userName,
                 imageUrl:args.imageUrl,
-                upgrade:true
+                upgrade:false
             });
 
             return "inserted New User..."
@@ -42,7 +42,7 @@ export const userUpgradePlan = mutation({
       }
       return "Error"
       console.log();
-      
+
     }
 });
 
