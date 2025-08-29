@@ -389,7 +389,7 @@ function SideBar() {
 
   const nav = [
     { path: "/dashboard", label: "Workspace", icon: <Layout className="h-5 w-5" /> },
-    { path: "/dashboard/upgrade", label: "Upgrade", icon: <Shield className="h-5 w-5" /> },
+    // { path: "/dashboard/upgrade", label: "Upgrade", icon: <Shield className="h-5 w-5" /> },
   ];
 
   const goUpgrade = () => {
@@ -404,46 +404,46 @@ function SideBar() {
   };
 
   // Usage stats/progress bar component for reuse
-  const UsageStats = (
-    <div className="mt-auto pt-4 border-t border-gray-700/30">
-      {GetUserInfo?.upgrade ? (
-        // Premium user stats
-        <div>
-          <div className="h-2 bg-gray-700/20 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 w-full"></div>
-          </div>
-          <div className="flex items-center justify-between mt-1">
-            <p className="text-xs font-medium text-blue-400">
-              Premium Plan
-            </p>
-            <span className="text-xs bg-blue-900/20 text-blue-400 px-2 py-0.5 rounded-full">
-              Unlimited
-            </span>
-          </div>
-        </div>
-      ) : (
-        // Free user stats
-        <>
-          <Progress 
-            value={((fileList?.length || 0) / 5) * 100} 
-            className="h-2 bg-gray-700/20 [&>div]:bg-blue-600" 
-          />
-          <div className="flex items-center justify-between mt-1">
-            <p className="text-xs text-gray-300">
-              {fileList?.length || 0} of 5 PDFs
-            </p>
-            <Link 
-              href="/dashboard/upgrade" 
-              onClick={() => setOpen(false)}
-              className="text-xs text-blue-400 hover:text-blue-300"
-            >
-              Upgrade
-            </Link>
-          </div>
-        </>
-      )}
-    </div>
-  );
+  // const UsageStats = (
+  //   <div className="mt-auto pt-4 border-t border-gray-700/30">
+  //     {GetUserInfo?.upgrade ? (
+  //       // Premium user stats
+  //       <div>
+  //         <div className="h-2 bg-gray-700/20 rounded-full overflow-hidden">
+  //           <div className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 w-full"></div>
+  //         </div>
+  //         <div className="flex items-center justify-between mt-1">
+  //           <p className="text-xs font-medium text-blue-400">
+  //             Premium Plan
+  //           </p>
+  //           <span className="text-xs bg-blue-900/20 text-blue-400 px-2 py-0.5 rounded-full">
+  //             Unlimited
+  //           </span>
+  //         </div>
+  //       </div>
+  //     ) : (
+  //       // Free user stats
+  //       <>
+  //         <Progress 
+  //           value={((fileList?.length || 0) / 5) * 100} 
+  //           className="h-2 bg-gray-700/20 [&>div]:bg-blue-600" 
+  //         /> 
+  //          <div className="flex items-center justify-between mt-1">
+  //           <p className="text-xs text-gray-300">
+  //             {fileList?.length || 0} of 5 PDFs
+  //           </p>
+  //           <Link 
+  //             href="/dashboard/upgrade" 
+  //             onClick={() => setOpen(false)}
+  //             className="text-xs text-blue-400 hover:text-blue-300"
+  //           >
+  //             Upgrade
+  //           </Link>
+  //         </div> 
+  //       </>
+  //     )}
+  //   </div>
+  // );
 
   const Content = (
     <div className="flex flex-col h-full">
@@ -497,7 +497,7 @@ function SideBar() {
         <div className="flex-1"></div>
         
         {/* Progress bar at bottom */}
-        {UsageStats}
+        {/* {UsageStats} */}
       </div>
     </div>
   );
