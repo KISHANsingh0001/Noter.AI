@@ -1,33 +1,17 @@
 
 "use client";
-import { api } from "@/convex/_generated/api";
-import { userUpgradePlan } from "@/convex/user";
 import { useUser } from "@clerk/nextjs";
-import { PayPalButtons } from "@paypal/react-paypal-js";
-import { useMutation } from "convex/react";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Script from "next/script";
-import { Wind } from "lucide-react";
 
 function Upgrade() {
-  const [amount, setAmount] = useState(499);
+  const [amount, setAmount] = useState(1);
 
   const { user } = useUser();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
-  const upgradeUserPlan = useMutation(api.user.userUpgradePlan);
-  const OnpaymentSuccess = async () => {
-    const result = await upgradeUserPlan({
-      userEmail: user?.primaryEmailAddress?.emailAddress,
-    });
-    toast("Plan Upgraded Successfully");
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1500);
-  };
-
   const createOrder = async () => {
   try {
     setIsProcessing(true);
