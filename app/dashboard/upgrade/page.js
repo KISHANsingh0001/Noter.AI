@@ -240,7 +240,7 @@ function Upgrade() {
 
                 <p className="mt-2">
                   <strong className="text-3xl font-bold text-white">
-                    ₹499
+                    ₹299
                   </strong>
 
                   <span className="text-sm font-medium text-gray-400 ml-1">
