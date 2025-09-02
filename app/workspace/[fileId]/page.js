@@ -17,15 +17,16 @@ function Workspace() {
        
     },[fileInfo])
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
-      <WorkspaceHeader  fileName={fileInfo?.fileName}/> {/* sticky already */}
-      <div className="flex-1 overflow-hidden grid grid-cols-2 gap-0">
-        {/* Editor pane */}
-        <div className="min-h-0 overflow-hidden flex flex-col">
-          <TextEditior fileId={fileId} /> {/* internally handles its own scrolling */}
+   <div className="h-screen flex flex-col overflow-hidden">
+      <WorkspaceHeader fileName={fileInfo?.fileName}/>
+      
+      <div className="flex-1 overflow-hidden flex flex-col md:grid md:grid-cols-2 gap-0">
+        {/* Editor  */}
+        <div className="min-h-0 overflow-hidden flex flex-col h-1/2 md:h-auto">
+          <TextEditior fileId={fileId} />
         </div>
-        {/* PDF pane */}
-        <div className="min-h-0 overflow-hidden flex flex-col border-l">
+        {/* PDF  */}
+        <div className="min-h-0 overflow-hidden flex flex-col border-l h-1/2 md:h-auto">
           <div className="flex-1 min-h-0 overflow-auto">
             <PdfViewer fileUrl={fileInfo?.fileUrl} />
           </div>
