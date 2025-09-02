@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import Script from "next/script";
 
 function Upgrade() {
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState(99);
 
   const { user } = useUser();
   const router = useRouter();
