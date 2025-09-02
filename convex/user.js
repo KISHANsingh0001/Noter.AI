@@ -19,7 +19,7 @@ export const createUser = mutation({
                 email:args.email,
                 userName:args.userName,
                 imageUrl:args.imageUrl,
-                upgrade:true
+                upgrade:false
             });
 
             return "inserted New User..."
