@@ -392,7 +392,7 @@ export default function LandingPage() {
               <div className="mb-4 text-blue-400 text-sm uppercase font-medium tracking-wide">
                 Premium
               </div>
-              <h3 className="text-3xl font-bold mb-2 text-white">₹299</h3>
+              <h3 className="text-3xl font-bold mb-2 text-white">₹99</h3>
               <p className="text-gray-300 mb-6 text-sm">One-time payment</p>
 
               <div className="h-px w-full bg-blue-700/30 my-6"></div>
