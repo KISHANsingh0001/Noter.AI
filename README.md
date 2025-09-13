@@ -60,4 +60,4 @@ See `.env.example` for the complete list of required variables.
 
 ---
 
-Created with ❤️
+Created by ❤️ Kishan Singh Thakur
